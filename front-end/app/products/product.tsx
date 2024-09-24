@@ -1,29 +1,37 @@
-import {Card, Stack, Typography} from '@mui/material';
-import {Product as IProduct} from './interfaces/product.interface';
+'use client';
+import {Card, CardActionArea, Stack, Typography} from '@mui/material';
 import Image from 'next/image';
-import {API_URL} from '../common/constants/api';
+import {useRouter} from 'next/navigation';
+import {Product as IProduct} from './interfaces/product.interface';
+import {getProductImage} from './product-image';
 
 interface Props {
   product: IProduct;
 }
 export default function Product({product}: Props) {
+  const router = useRouter();
   return (
-    <Card className='p-4'>
-      <Stack gap={3}>
-        <Typography variant='h4'>{product.name}</Typography>
-        {product.imageExits && (
-          <Image
-            src={`${API_URL}/products/${product.id}.png`}
-            alt='Product image'
-            width={0}
-            height={0}
-            sizes='100vw'
-            className='w-full h-[200px] object-cover'
-          />
-        )}
-        <Typography>{product.description}</Typography>
-        <Typography>${product.price}</Typography>
-      </Stack>
-    </Card>
+    <CardActionArea
+      onClick={() => {
+        router.push(`/products/${product.id}`);
+      }}>
+      <Card className='p-4'>
+        <Stack gap={3}>
+          <Typography variant='h4'>{product.name}</Typography>
+          {product.imageExits && (
+            <Image
+              src={getProductImage(product.id)}
+              alt='Product image'
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='w-full h-[200px] object-cover'
+            />
+          )}
+          <Typography>{product.description}</Typography>
+          <Typography>${product.price}</Typography>
+        </Stack>
+      </Card>
+    </CardActionArea>
   );
 }

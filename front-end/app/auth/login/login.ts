@@ -11,7 +11,7 @@ export default async function login(
   _prevState: FormResponse,
   formData: FormData,
 ) {
-  const {error, data} = await post('auth/login', formData);
+  const {error, data} = await post('auth/login', formData, false);
   if (error) {
     return {error};
   }
