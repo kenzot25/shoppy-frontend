@@ -3,6 +3,7 @@ import getProduct from './get-product';
 import Image from 'next/image';
 import {getProductImage} from '../product-image';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import Checkout from '@/app/checkout/checkout';
 
 interface Props {
   params: {
@@ -31,6 +32,7 @@ export default async function SingleProduct({params: {productId}}: Props) {
           <Typography variant='h2'>{product.name}</Typography>
           <Typography>{product.description}</Typography>
           <Typography variant='h4'>${product.price}</Typography>
+          <Checkout productId={+productId} />
         </Stack>
       </Grid>
     </Grid>

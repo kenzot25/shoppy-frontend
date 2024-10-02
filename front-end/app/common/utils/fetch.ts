@@ -4,9 +4,10 @@ import {getErrorMessage} from './errors';
 
 export const post = async (
   path: string,
-  formData: FormData,
+  data: FormData | object,
   parseData: boolean = true,
 ) => {
+  const body = data instanceof FormData ? Object.fromEntries(data) : data;
   const cookie = cookies().toString();
 
   const res = await fetch(`${API_URL}/${path}`, {
@@ -15,7 +16,7 @@ export const post = async (
       'Content-Type': 'application/json',
       Cookie: cookie,
     },
-    body: JSON.stringify(Object.fromEntries(formData)),
+    body: JSON.stringify(body),
   });
   const parsedRes = await res.json();
   if (!res.ok) {

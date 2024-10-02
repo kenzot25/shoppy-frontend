@@ -1,4 +1,5 @@
 'use client';
+
 import {Card, CardActionArea, Stack, Typography} from '@mui/material';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
@@ -13,7 +14,7 @@ export default function Product({product}: Props) {
   return (
     <CardActionArea
       onClick={() => {
-        router.push(`/products/${product.id}`);
+        return router.push(`/products/${product.id}`);
       }}>
       <Card className='p-4'>
         <Stack gap={3}>
@@ -30,6 +31,7 @@ export default function Product({product}: Props) {
           )}
           <Typography>{product.description}</Typography>
           <Typography>${product.price}</Typography>
+          <Typography>Sold: {product.sold ? "sold": "not-sold"}</Typography>
         </Stack>
       </Card>
     </CardActionArea>
