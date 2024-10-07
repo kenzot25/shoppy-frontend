@@ -1,7 +1,7 @@
 import {Container, CssBaseline} from '@mui/material';
 import type {Metadata} from 'next';
 import {Inter} from 'next/font/google';
-import authenticated from './auth/authenticated';
+import authenticated from './auth/actions/authenticated';
 import './globals.css';
 import Header from './header/header';
 import Provider from './provider';

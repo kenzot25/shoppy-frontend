@@ -27,9 +27,14 @@ export const post = async (
   return {error: '', data: parseData ? parsedRes : res};
 };
 
-export const get = async <T>(path: string, tags?: string[]) => {
+export const get = async <T>(
+  path: string,
+  tags?: string[],
+  params?: URLSearchParams,
+) => {
   const cookie = cookies().toString();
-  const res = await fetch(`${API_URL}/${path}`, {
+  const url = params ? `${API_URL}/${path}?` + params : `${API_URL}/${path}`;
+  const res = await fetch(url, {
     headers: {
       Cookie: cookie,
     },
